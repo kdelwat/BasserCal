@@ -1,2 +1,13 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<p>Welcome to BasserCal</p>
+<ul>
+	{{#each events}}
+	<li>
+		<div>
+			<h1>{{this.date}}</h1>
+			<ul>
+				{{#each this.events}} {{this.name}} {{/each}}
+			</ul>
+		</div>
+	</li>
+	{{/each}}
+</ul>
