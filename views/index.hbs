@@ -5,7 +5,9 @@
 		<div>
 			<h1>{{this.date}}</h1>
 			<ul>
-				{{#each this.events}} {{this.name}} {{/each}}
+				{{#each this.events}}
+				<a href="/events/{{this.id}}">{{this.name}}</a>
+				{{/each}}
 			</ul>
 		</div>
 	</li>
