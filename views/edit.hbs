@@ -1,0 +1,15 @@
+<h1>Edit</h1>
+<form method="POST">
+	<p>Name</p>
+	<input type="text" id="name" name="name" value="{{event.name}}">
+	<p>Description</p>
+	<textarea name="description" id="description">{{event.description}}</textarea>
+	<p>Date</p>
+	<input id="date" name="date" type="date" value="{{dateValue}}">
+	<p>Time</p>
+	<input id="time" name="time" type="time" value="{{timeValue}}">
+	<input type="submit">
+</form>
+<h1>{{event.name}}</h1>
+<p>@{{event.date}}</p>
+<p>{{event.description}}</p>
