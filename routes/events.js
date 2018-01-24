@@ -3,8 +3,11 @@ var router = express.Router();
 var moment = require('moment');
 var db = require('../persistence/db');
 var passport = require('passport');
+var authenticationMiddleware = require('connect-ensure-login');
 
-router.get('/new', function(req, res, next) {
+var ensureLoggedIn = authenticationMiddleware.ensureLoggedIn;
+
+router.get('/new', ensureLoggedIn('/login'), function(req, res, next) {
   const lastId = db
     .get('events')
     .last()
@@ -37,47 +40,39 @@ router.get('/:id', function(req, res, next) {
   res.render('details', { event: event });
 });
 
-router.get(
-  '/:id/edit',
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res, next) {
-    const id = parseInt(req.params.id, 10);
+router.get('/:id/edit', ensureLoggedIn('/login'), function(req, res, next) {
+  const id = parseInt(req.params.id, 10);
 
-    const event = db
-      .get('events')
-      .find({ id: id })
-      .value();
+  const event = db
+    .get('events')
+    .find({ id: id })
+    .value();
 
-    res.render('edit', {
-      event: event,
-      dateValue: moment(event.date).format('YYYY-MM-DD'),
-      timeValue: moment(event.date).format('HH:mm')
-    });
-  }
-);
+  res.render('edit', {
+    event: event,
+    dateValue: moment(event.date).format('YYYY-MM-DD'),
+    timeValue: moment(event.date).format('HH:mm')
+  });
+});
 
-router.post(
-  '/:id/edit',
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res, next) {
-    const id = parseInt(req.params.id, 10);
-    const event = {
-      id: id,
-      name: req.body.name,
-      description: req.body.description,
-      date: moment(req.body.date + ' ' + req.body.time),
-      portfolio: req.body.portfolio
-    };
-    console.log(event);
-    db
-      .get('events')
-      .find({ id: id })
-      .assign(event)
-      .write();
+router.post('/:id/edit', ensureLoggedIn('/login'), function(req, res, next) {
+  const id = parseInt(req.params.id, 10);
+  const event = {
+    id: id,
+    name: req.body.name,
+    description: req.body.description,
+    date: moment(req.body.date + ' ' + req.body.time),
+    portfolio: req.body.portfolio
+  };
+  console.log(event);
+  db
+    .get('events')
+    .find({ id: id })
+    .assign(event)
+    .write();
 
-    res.status(200);
-    res.send('Successfully edited');
-  }
-);
+  res.status(200);
+  res.send('Successfully edited');
+});
 
 module.exports = router;

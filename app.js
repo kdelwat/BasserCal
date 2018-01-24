@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var session = require('express-session');
 
 var db = require('./persistence/db');
 
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({ secret: 'a secret' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -82,7 +84,7 @@ passport.deserializeUser(function(user, done) {
     null,
     db
       .get('users')
-      .find(x => x.username === user)
+      .find(x => x.name === user)
       .value()
   );
 });
