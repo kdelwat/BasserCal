@@ -35,7 +35,8 @@ router.post('/:id/edit', function(req, res, next) {
     id: id,
     name: req.body.name,
     description: req.body.description,
-    date: moment(req.body.date + ' ' + req.body.time)
+    date: moment(req.body.date + ' ' + req.body.time),
+    portfolio: req.body.portfolio
   };
   console.log(event);
   db

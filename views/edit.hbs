@@ -8,8 +8,16 @@
 	<input id="date" name="date" type="date" value="{{dateValue}}">
 	<p>Time</p>
 	<input id="time" name="time" type="time" value="{{timeValue}}">
+	<p>Portfolio</p>
+	<select id="portfolio" name="portfolio" selected="{{event.portfolio}}">
+		<option value="social">Social</option>
+		<option value="communities">Communities</option>
+		<option value="cultural">Cultural</option>
+		<option value="sport">Sport</option>
+	</select>
 	<input type="submit">
 </form>
 <h1>{{event.name}}</h1>
 <p>@{{event.date}}</p>
 <p>{{event.description}}</p>
+<p>{{event.portfolio}}</p>
