@@ -71,8 +71,7 @@ router.post('/:id/edit', ensureLoggedIn('/login'), function(req, res, next) {
     .assign(event)
     .write();
 
-  res.status(200);
-  res.send('Successfully edited');
+  res.redirect(`/events/${id}/`);
 });
 
 module.exports = router;
