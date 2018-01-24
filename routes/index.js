@@ -44,4 +44,8 @@ router.post(
   })
 );
 
+router.get('/calendar', function(req, res, next) {
+  res.render('calendar');
+});
+
 module.exports = router;
