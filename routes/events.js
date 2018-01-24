@@ -3,6 +3,28 @@ var router = express.Router();
 var moment = require('moment');
 var db = require('../persistence/db');
 
+router.get('/new', function(req, res, next) {
+  const lastId = db
+    .get('events')
+    .last()
+    .value().id;
+
+  const newEvent = {
+    id: lastId + 1,
+    name: 'New event',
+    description: 'Add some details',
+    date: moment(),
+    portfolio: 'social'
+  };
+
+  db
+    .get('events')
+    .push(newEvent)
+    .write();
+
+  res.redirect(`/events/${newEvent.id}/edit`);
+});
+
 router.get('/:id', function(req, res, next) {
   const id = parseInt(req.params.id, 10);
 
