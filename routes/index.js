@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var moment = require('moment');
 var db = require('../persistence/db');
+var passport = require('passport');
 
 const getWeekEvents = () => {
   const startDate = moment();
@@ -30,5 +31,17 @@ router.get('/', function(req, res, next) {
   console.log(events);
   res.render('index', { events: events });
 });
+
+router.get('/login', function(req, res, next) {
+  res.render('login');
+});
+
+router.post(
+  '/login',
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  })
+);
 
 module.exports = router;

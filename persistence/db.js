@@ -7,6 +7,7 @@ const db = low(adapter);
 
 db
   .defaults({
+    users: [{ name: 'cadel', password: 'password1' }],
     events: [
       {
         id: 1,

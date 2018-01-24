@@ -4,6 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+
+var db = require('./persistence/db');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -22,6 +25,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);
 app.use('/events', events);
@@ -43,6 +49,42 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+// set up authentication
+var LocalStrategy = require('passport-local').Strategy;
+
+passport.use(
+  new LocalStrategy(function(username, password, done) {
+    const user = db
+      .get('users')
+      .find(user => user.name == username)
+      .value();
+
+    if (user === undefined) {
+      return done(null, false, { message: "User doesn't exist" });
+    }
+
+    if (user.password !== password) {
+      return done(null, false, { message: 'Password incorrect' });
+    }
+
+    return done(null, user);
+  })
+);
+
+passport.serializeUser(function(user, done) {
+  done(null, user.name);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(
+    null,
+    db
+      .get('users')
+      .find(x => x.username === user)
+      .value()
+  );
 });
 
 module.exports = app;
