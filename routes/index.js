@@ -17,8 +17,8 @@ const getWeekEvents = () => {
       .getState()
       .events.filter(event => moment(event.date).isSame(day.date, 'day'));
 
-    day.date = day.date.format('ddd (D/M)');
-
+    day.dayOfMonth = day.date.format('D');
+    day.dayOfWeek = day.date.format('ddd');
     events.push(day);
   }
 

@@ -1,16 +1,25 @@
-<p>Welcome to BasserCal</p>
-<ul>
-	{{#each events}}
-	<li>
-		<div>
-			<h1>{{this.date}}</h1>
-			<ul>
-				{{#each this.events}}
-				<a href="/events/{{this.id}}/">{{this.name}}</a>
-				{{/each}}
-			</ul>
+<h1 class="title">Basser this week...</h1>
+<div class="calendar is-large">
+	<div class="calendar-container">
+		<div class="calendar-header">
+			{{#each events}}
+			<div class="calendar-date">{{this.dayOfWeek}}</div>
+			{{/each}}
 		</div>
-	</li>
-	{{/each}}
-</ul>
-<a href="/events/new">Add event</a>
+
+		<div class="calendar-body">
+			{{#each events}}
+			<div class="calendar-date">
+				<button class="date-item">{{this.dayOfMonth}}</button>
+				<div class="calendar-events">
+					{{#each this.events}}
+					<a href="/events/{{this.id}}/" class="calendar-event">{{this.name}}</a>
+					{{/each}}
+				</div>
+			</div>
+			{{/each}}
+		</div>
+	</div>
+</div>
+
+<a class="button is-primary" href="/events/new">Add event</a>

@@ -1,23 +1,51 @@
-<h1>Edit</h1>
+<h1 class="title">Edit event</h1>
+
 <form method="POST">
-	<p>Name</p>
-	<input type="text" id="name" name="name" value="{{event.name}}">
-	<p>Description</p>
-	<textarea name="description" id="description">{{event.description}}</textarea>
-	<p>Date</p>
-	<input id="date" name="date" type="date" value="{{dateValue}}">
-	<p>Time</p>
-	<input id="time" name="time" type="time" value="{{timeValue}}">
-	<p>Portfolio</p>
-	<select id="portfolio" name="portfolio" selected="{{event.portfolio}}">
-		<option value="social">Social</option>
-		<option value="communities">Communities</option>
-		<option value="cultural">Cultural</option>
-		<option value="sport">Sport</option>
-	</select>
-	<input type="submit">
+	<div class="field">
+		<label for="name" class="label">Name</label>
+		<div class="control">
+			<input class="input" type="text" name="name" value="{{event.name}}">
+		</div>
+	</div>
+
+	<div class="field">
+		<label for="description" class="label">Description</label>
+		<div class="control">
+			<textarea class="textarea" name="description">{{event.description}}</textarea>
+		</div>
+	</div>
+
+	<div class="field">
+		<label for="date" class="label">Date</label>
+		<div class="control">
+			<input name="date" type="date" value="{{dateValue}}">
+		</div>
+	</div>
+
+	<div class="field">
+		<label for="time" class="label">Time</label>
+		<div class="control">
+			<input id="time" name="time" type="time" value="{{timeValue}}">
+		</div>
+	</div>
+
+	<div class="portfolio">
+		<label for="portfolio" class="label">Portfolio</label>
+		<div class="control">
+			<div class="select">
+				<select name="portfolio" selected="{{event.portfolio}}">
+					<option value="social">Social</option>
+					<option value="communities">Communities</option>
+					<option value="cultural">Cultural</option>
+					<option value="sport">Sport</option>
+				</select>
+			</div>
+		</div>
+	</div>
+
+	<div class="field">
+		<div class="control">
+			<input class="button is-link" type="submit">
+		</div>
+	</div>
 </form>
-<h1>{{event.name}}</h1>
-<p>@{{event.date}}</p>
-<p>{{event.description}}</p>
-<p>{{event.portfolio}}</p>

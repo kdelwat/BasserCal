@@ -1,5 +1,16 @@
-<h1>{{event.name}}</h1>
-<p>@{{event.date}}</p>
-<p>{{event.description}}</p>
-<p>{{event.portfolio}}</p>
-<a href="edit">Edit this event</a>
+<div class="card">
+	<div class="card-header">
+		<h1 class="card-header-title">{{event.name}}</h1>
+	</div>
+	<div class="card-content">
+		<div class="content">
+			<p>@{{event.date}}</p>
+			<p>{{event.description}}</p>
+			<p>{{event.portfolio}}</p>
+		</div>
+	</div>
+	<footer class="card-footer">
+		<a href="edit" class="card-footer-item">Edit</a>
+		<a href="delete" class="card-footer-item">Delete</a>
+	</footer>
+</div>

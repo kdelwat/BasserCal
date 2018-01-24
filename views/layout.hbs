@@ -3,15 +3,27 @@
 
 <head>
   <title>{{title}}</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css' />
+  <link rel='stylesheet' href='/stylesheets/bulma-calendar.min.css' />
+
 </head>
 
 <body>
-  <div>
-    <a href="/">Home</a>
-    <a href="/calendar">Calendar</a>
+  <div class="navbar is-primary">
+    <div class="navbar-brand">
+      <a href="/" class="navbar-item">BasserCal</a>
+      <a href="/" class="navbar-item">Week</a>
+      <a href="/calendar" class="navbar-item">Month</a>
+    </div>
+
   </div>
-  {{{body}}}
+  <section class="section">
+    <div class="container">
+      {{{body}}}
+    </div>
+  </section>
 </body>
 
 </html>
