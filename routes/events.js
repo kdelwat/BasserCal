@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var moment = require('moment');
+var moment = require('moment-timezone');
 var db = require('../persistence/db');
 var passport = require('passport');
 var authenticationMiddleware = require('connect-ensure-login');
@@ -17,7 +17,7 @@ router.get('/new', ensureLoggedIn('/login'), function(req, res, next) {
     id: lastId + 1,
     name: 'New event',
     description: 'Add some details',
-    date: moment(),
+    date: moment().tz('Australia/Sydney'),
     portfolio: 'social'
   };
 
@@ -61,7 +61,7 @@ router.post('/:id/edit', ensureLoggedIn('/login'), function(req, res, next) {
     id: id,
     name: req.body.name,
     description: req.body.description,
-    date: moment(req.body.date + ' ' + req.body.time),
+    date: moment.tz(req.body.date + ' ' + req.body.time, 'Australia/Sydney'),
     portfolio: req.body.portfolio
   };
   console.log(event);

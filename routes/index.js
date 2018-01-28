@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var moment = require('moment');
+var moment = require('moment-timezone');
 var db = require('../persistence/db');
 var passport = require('passport');
 
 const getWeekEvents = () => {
-  const startDate = moment();
+  const startDate = moment().tz('Australia/Sydney');
 
   let events = [];
   for (let i = 0; i <= 6; i++) {
@@ -15,7 +15,9 @@ const getWeekEvents = () => {
 
     day.events = db
       .getState()
-      .events.filter(event => moment(event.date).isSame(day.date, 'day'));
+      .events.filter(event =>
+        moment.tz(event.date, 'Australia/Sydney').isSame(day.date, 'day')
+      );
 
     day.dayOfMonth = day.date.format('D');
     day.dayOfWeek = day.date.format('ddd');
