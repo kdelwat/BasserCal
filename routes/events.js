@@ -7,6 +7,13 @@ var authenticationMiddleware = require('connect-ensure-login');
 
 var ensureLoggedIn = authenticationMiddleware.ensureLoggedIn;
 
+const portfolioClasses = {
+  social: 'is-primary',
+  sport: 'is-warning',
+  communities: 'is-danger',
+  cultural: 'is-info'
+};
+
 router.get('/new', ensureLoggedIn('/login'), function(req, res, next) {
   const lastId = db
     .get('events')
@@ -36,6 +43,15 @@ router.get('/:id', function(req, res, next) {
     .get('events')
     .find({ id: id })
     .value();
+
+  event.class = portfolioClasses[event.portfolio];
+  event.datestamp = moment
+    .tz(event.date, 'Sydney/Australia')
+    .format('dddd, MMMM Do');
+  event.timestamp = moment.tz(event.date, 'Sydney/Australia').format('h:mm a');
+  event.delta = moment()
+    .tz('Sydney/Australia')
+    .to(moment.tz(event.date, 'Sydney/Australia'));
 
   res.render('details', { event: event });
 });

@@ -23,3 +23,8 @@
 .weekday {
   display: none;
 }
+
+.tag {
+  text-transform: capitalize;
+  margin: 0.75rem;
+}

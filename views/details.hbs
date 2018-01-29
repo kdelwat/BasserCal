@@ -1,12 +1,12 @@
 <div class="card">
 	<div class="card-header">
 		<h1 class="card-header-title">{{event.name}}</h1>
+		<span class="tag {{event.class}}">{{event.portfolio}}</span>
 	</div>
 	<div class="card-content">
 		<div class="content">
-			<p>@{{event.date}}</p>
-			<p>{{event.description}}</p>
-			<p>{{event.portfolio}}</p>
+			<p style="font-style: italic">Scheduled for {{event.datestamp}} at {{event.timestamp}} ({{event.delta}})</p>
+			<blockquote>{{event.description}}</blockquote>
 		</div>
 	</div>
 	<footer class="card-footer">
