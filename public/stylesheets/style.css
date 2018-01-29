@@ -18,6 +18,12 @@
   .calendar.is-large .date-item {
     align-self: flex-start;
   }
+
+  .page-header {
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
 }
 
 .weekday {
@@ -32,5 +38,4 @@
 .page-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
