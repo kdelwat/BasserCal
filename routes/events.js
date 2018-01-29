@@ -106,7 +106,6 @@ router.post('/:id/edit', ensureLoggedIn('/login'), function(req, res, next) {
     date: moment.tz(req.body.date + ' ' + req.body.time, 'Australia/Sydney'),
     portfolio: req.body.portfolio
   };
-  console.log(event);
   db
     .get('events')
     .find({ id: id })
