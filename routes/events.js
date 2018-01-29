@@ -56,6 +56,30 @@ router.get('/:id', function(req, res, next) {
   res.render('details', { event: event });
 });
 
+router.get('/:id/delete', ensureLoggedIn('/login'), function(req, res, next) {
+  const id = parseInt(req.params.id, 10);
+
+  const event = db
+    .get('events')
+    .find({ id: id })
+    .value();
+
+  res.render('delete', {
+    event: event
+  });
+});
+
+router.post('/:id/delete', ensureLoggedIn('/login'), function(req, res, next) {
+  const id = parseInt(req.params.id, 10);
+
+  const event = db
+    .get('events')
+    .remove({ id: id })
+    .write();
+
+  res.redirect('/');
+});
+
 router.get('/:id/edit', ensureLoggedIn('/login'), function(req, res, next) {
   const id = parseInt(req.params.id, 10);
 
