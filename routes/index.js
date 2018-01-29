@@ -94,7 +94,12 @@ router.get('/calendar/:month', function(req, res, next) {
   var startDate = firstOfMonth.clone().subtract(startDay, 'days');
 
   var days = [];
-  for (var i = 0; i < monthLengths[req.params.month] + 7; i++) {
+
+  var noDays = startDay + monthLengths[req.params.month];
+  var endPad = (noDays % 7 + 1) * 7 - noDays;
+  noDays += endPad;
+
+  for (var i = 0; i < noDays; i++) {
     const day = {
       date: startDate.clone().add(i, 'days')
     };
