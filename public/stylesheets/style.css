@@ -28,3 +28,9 @@
   text-transform: capitalize;
   margin: 0.75rem;
 }
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
