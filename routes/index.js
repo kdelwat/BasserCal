@@ -73,6 +73,14 @@ const monthLengths = {
   12: 31
 };
 
+router.get('/calendar', function(req, res, next) {
+  const currentMonth =
+    moment()
+      .tz('Australia/Sydney')
+      .month() + 1;
+  res.redirect('/calendar/' + currentMonth);
+});
+
 router.get('/calendar/:month', function(req, res, next) {
   var month = parseInt(req.params.month, 10);
   var firstString;
