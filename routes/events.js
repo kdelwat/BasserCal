@@ -53,7 +53,7 @@ router.get('/:id', function(req, res, next) {
     .tz('Sydney/Australia')
     .to(moment.tz(event.date, 'Sydney/Australia'));
 
-  res.render('details', { event: event });
+  res.render('details', { event: event, title: event.name });
 });
 
 router.get('/:id/delete', ensureLoggedIn('/login'), function(req, res, next) {
@@ -65,7 +65,8 @@ router.get('/:id/delete', ensureLoggedIn('/login'), function(req, res, next) {
     .value();
 
   res.render('delete', {
-    event: event
+    event: event,
+    title: 'Delete event'
   });
 });
 
@@ -91,7 +92,8 @@ router.get('/:id/edit', ensureLoggedIn('/login'), function(req, res, next) {
   res.render('edit', {
     event: event,
     dateValue: moment(event.date).format('YYYY-MM-DD'),
-    timeValue: moment(event.date).format('HH:mm')
+    timeValue: moment(event.date).format('HH:mm'),
+    title: 'Edit event'
   });
 });
 

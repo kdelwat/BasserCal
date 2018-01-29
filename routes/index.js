@@ -47,7 +47,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('login');
+  res.render('login', { title: 'Login' });
 });
 
 router.post(
@@ -131,7 +131,8 @@ router.get('/calendar/:month', function(req, res, next) {
     days: days,
     nextMonth: nextMonth,
     prevMonth: prevMonth,
-    monthName: firstOfMonth.format('MMMM')
+    monthName: firstOfMonth.format('MMMM'),
+    title: 'Calendar'
   });
 });
 
