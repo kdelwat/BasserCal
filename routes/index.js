@@ -62,8 +62,9 @@ router.get('/calendar/:month', function(req, res, next) {
 
   // Calculate the number of days needed to fill the month.
   var noDays = startDay + monthLengths[req.params.month];
-  var endPad = (noDays % 7 + 1) * 7 - noDays;
-  noDays += endPad;
+  if (noDays % 7 !== 0) {
+    noDays += Math.floor(noDays / 7 + 1) * 7 - noDays;
+  }
 
   // Set the start date to the Sunday before the month begins.
   var startDate = firstOfMonth.clone().subtract(startDay, 'days');
