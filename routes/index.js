@@ -62,7 +62,7 @@ const monthLengths = {
 };
 
 router.get('/calendar/:month', function(req, res, next) {
-  var month = req.params.month;
+  var month = parseInt(req.params.month, 10);
   var firstString;
   if (month < 10) {
     firstString = `2018-0${req.params.month}-01`;
@@ -95,7 +95,14 @@ router.get('/calendar/:month', function(req, res, next) {
     days.push(day);
   }
 
-  res.render('calendar', { days: days });
+  var nextMonth = month < 12 ? month + 1 : month;
+  var prevMonth = month > 1 ? month - 1 : month;
+  res.render('calendar', {
+    days: days,
+    nextMonth: nextMonth,
+    prevMonth: prevMonth,
+    monthName: firstOfMonth.format('MMMM')
+  });
 });
 
 module.exports = router;
