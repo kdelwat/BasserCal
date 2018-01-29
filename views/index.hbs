@@ -1,25 +1,27 @@
 <h1 class="title">Basser this week...</h1>
-<div class="calendar is-large">
-	<div class="calendar-container">
-		<div class="calendar-header">
-			{{#each events}}
-			<div class="calendar-date">{{this.dayOfWeek}}</div>
-			{{/each}}
-		</div>
-
-		<div class="calendar-body">
-			{{#each events}}
-			<div class="calendar-date">
-				<button class="date-item">{{this.dayOfMonth}}</button>
-				<div class="calendar-events">
-					{{#each this.events}}
-					<a href="/events/{{this.id}}/" class="calendar-event {{this.class}}">{{this.name}}</a>
-					{{/each}}
-				</div>
+<div class="week">
+	<div class="calendar is-large">
+		<div class="calendar-container">
+			<div class="calendar-header">
+				{{#each events}}
+				<div class="calendar-date">{{this.dayOfWeek}}</div>
+				{{/each}}
 			</div>
-			{{/each}}
+
+			<div class="calendar-body">
+				{{#each events}}
+				<div class="calendar-date card">
+					<button class="date-item">
+						<span class="weekday">{{this.dayOfWeek}}&nbsp;</span>{{this.dayOfMonth}}</button>
+					<div class="calendar-events">
+						{{#each this.events}}
+						<a href="/events/{{this.id}}/" class="calendar-event {{this.class}}">{{this.name}}</a>
+						{{/each}}
+					</div>
+				</div>
+				{{/each}}
+			</div>
 		</div>
 	</div>
 </div>
-
 <a class="button is-primary" href="/events/new">Add event</a>
