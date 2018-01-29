@@ -42,7 +42,6 @@ const getWeekEvents = () => {
 /* GET home page. */
 router.get('/', function(req, res, next) {
   const events = getWeekEvents();
-  console.log(events);
   res.render('index', { events: events });
 });
 

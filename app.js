@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
+var passwordHash = require('password-hash');
 
 var db = require('./persistence/db');
 
@@ -67,7 +68,7 @@ passport.use(
       return done(null, false, { message: "User doesn't exist" });
     }
 
-    if (user.password !== password) {
+    if (!passwordHash.verify(password, user.password)) {
       return done(null, false, { message: 'Password incorrect' });
     }
 
