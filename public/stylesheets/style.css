@@ -1,8 +1,25 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@media (max-width: 768px) {
+  .calendar .calendar-header {
+    display: none;
+  }
+
+  .calendar-body {
+    flex-direction: column;
+  }
+
+  .calendar .calendar-header .calendar-date, .calendar .calendar-body .calendar-date {
+    max-width: 100%;
+  }
+
+  .weekday {
+    display: inline !important;
+  }
+
+  .calendar.is-large .date-item {
+    align-self: flex-start;
+  }
 }
 
-a {
-  color: #00B7FF;
+.weekday {
+  display: none;
 }

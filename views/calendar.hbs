@@ -29,7 +29,8 @@
 		<div class="calendar-body">
 			{{# each days}} {{# if this.outsideMonth}}
 			<div class="calendar-date is-disabled">
-				<button class="date-item">{{this.dayOfMonth}}</button>
+				<button class="date-item">
+					<span class="weekday">{{this.dayOfWeek}}&nbsp;</span>{{this.dayOfMonth}}</button>
 				<div class="calendar-events">
 					{{#each this.events}}
 					<a href="/events/{{this.id}}/" class="calendar-event {{this.class}}">{{this.name}}</a>
@@ -38,7 +39,8 @@
 			</div>
 			{{else}}
 			<div class="calendar-date">
-				<button class="date-item">{{this.dayOfMonth}}</button>
+				<button class="date-item">
+					<span class="weekday">{{this.dayOfWeek}}&nbsp;</span>{{this.dayOfMonth}}</button>
 				<div class="calendar-events">
 					{{#each this.events}}
 					<a href="/events/{{this.id}}/" class="calendar-event {{this.class}}">{{this.name}}</a>
