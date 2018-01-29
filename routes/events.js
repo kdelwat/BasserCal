@@ -46,12 +46,12 @@ router.get('/:id', function(req, res, next) {
 
   event.class = portfolioClasses[event.portfolio];
   event.datestamp = moment
-    .tz(event.date, 'Sydney/Australia')
+    .tz(event.date, 'Australia/Sydney')
     .format('dddd, MMMM Do');
-  event.timestamp = moment.tz(event.date, 'Sydney/Australia').format('h:mm a');
+  event.timestamp = moment.tz(event.date, 'Australia/Sydney').format('h:mm a');
   event.delta = moment()
-    .tz('Sydney/Australia')
-    .to(moment.tz(event.date, 'Sydney/Australia'));
+    .tz('Australia/Sydney')
+    .to(moment.tz(event.date, 'Australia/Sydney'));
 
   res.render('details', { event: event, title: event.name });
 });
@@ -91,8 +91,8 @@ router.get('/:id/edit', ensureLoggedIn('/login'), function(req, res, next) {
 
   res.render('edit', {
     event: event,
-    dateValue: moment(event.date).format('YYYY-MM-DD'),
-    timeValue: moment(event.date).format('HH:mm'),
+    dateValue: moment.tz(event.date, 'Australia/Sydney').format('YYYY-MM-DD'),
+    timeValue: moment.tz(event.date, 'Australia/Sydney').format('HH:mm'),
     title: 'Edit event'
   });
 });
