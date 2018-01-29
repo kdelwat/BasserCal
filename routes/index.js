@@ -4,6 +4,13 @@ var moment = require('moment-timezone');
 var db = require('../persistence/db');
 var passport = require('passport');
 
+const portfolioClasses = {
+  social: 'is-primary',
+  sport: 'is-warning',
+  communities: 'is-danger',
+  cultural: 'is-info'
+};
+
 const getWeekEvents = () => {
   const startDate = moment().tz('Australia/Sydney');
 
@@ -18,6 +25,11 @@ const getWeekEvents = () => {
       .events.filter(event =>
         moment.tz(event.date, 'Australia/Sydney').isSame(day.date, 'day')
       );
+
+    for (var eventIndex = 0; eventIndex < day.events.length; eventIndex++) {
+      day.events[eventIndex].class =
+        portfolioClasses[day.events[eventIndex].portfolio];
+    }
 
     day.dayOfMonth = day.date.format('D');
     day.dayOfWeek = day.date.format('ddd');
@@ -85,6 +97,11 @@ router.get('/calendar/:month', function(req, res, next) {
       .events.filter(event =>
         moment.tz(event.date, 'Australia/Sydney').isSame(day.date, 'day')
       );
+
+    for (var eventIndex = 0; eventIndex < day.events.length; eventIndex++) {
+      day.events[eventIndex].class =
+        portfolioClasses[day.events[eventIndex].portfolio];
+    }
 
     if (day.date.month() + 1 != month) {
       day.outsideMonth = true;
