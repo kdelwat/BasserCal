@@ -3,7 +3,7 @@ var FileSync = require('lowdb/adapters/FileSync');
 var moment = require('moment-timezone');
 var passwordHash = require('password-hash');
 
-const adapter = new FileSync('db.json');
+const adapter = new FileSync('/data/db.json');
 const db = low(adapter);
 
 db
